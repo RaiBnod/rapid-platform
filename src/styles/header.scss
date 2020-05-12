@@ -4,7 +4,7 @@
   height: $header-height;
   background: $header-color;
 
-  .header {
+  .custom-header {
     padding: 0 $global-padding;
     display: inline-flex;
     .logo {
@@ -17,7 +17,8 @@
         height: $logo-height;
       }
     }
-    h1 {
+
+    .title {
       line-height: $header-height;
       color: white;
       font-size: 48px;

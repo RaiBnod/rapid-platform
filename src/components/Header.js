@@ -5,11 +5,11 @@ import logo from '../logo.png';
 function Header() {
   return (
     <div className="header-wrapper">
-      <div className="header" style={{ float: 'left' }}>
+      <div className="custom-header">
         <Link to="/" className="logo">
           <img src={logo} alt="logo" />
         </Link>
-        <h1>Documentation</h1>
+        <span className="title">Documentation</span>
       </div>
     </div>
   );

@@ -1,0 +1,16 @@
+@import 'variables';
+
+.nav-wrapper {
+  min-width: 220px;
+  padding: $global-padding $global-padding 0;
+  overflow-y: auto;
+  border-right: 1px #e5e5e5 solid;
+
+  .navigation {
+    color: #767676;
+  }
+
+  .uk-search-default {
+    width: 100%;
+  }
+}

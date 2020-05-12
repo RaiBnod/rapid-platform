@@ -1,5 +1,7 @@
+@import 'uikit';
 @import 'variables';
 @import 'header';
+@import 'navigation';
 
 * {
   margin: 0;
@@ -19,15 +21,8 @@
 }
 
 .main {
-  background-color: #eee;
   padding: $global-padding 80px 0;
   flex-grow: 1;
-}
-
-.nav-wrapper {
-  min-width: 220px;
-  padding: $global-padding $global-padding 0;
-  overflow-y: auto;
 }
 
 .aside-wrapper {
