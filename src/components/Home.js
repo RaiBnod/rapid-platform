@@ -1,7 +1,14 @@
 import React from 'react';
+import Aside from './Aside';
+import Main from './Main';
 
 function Home() {
-  return <div>Welcome to the Rapid Platform Dashboard</div>;
+  return (
+    <>
+      <Main />
+      <Aside />
+    </>
+  );
 }
 
 export default Home;

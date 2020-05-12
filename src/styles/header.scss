@@ -5,22 +5,18 @@
   background: $header-color;
 
   .header {
-    margin: 0 $global-margin;
+    padding: 0 $global-padding;
     display: inline-flex;
-
     .logo {
       :hover {
         cursor: pointer;
       }
-
       padding: 15px;
       height: $logo-height;
-
       img {
         height: $logo-height;
       }
     }
-
     h1 {
       line-height: $header-height;
       color: white;
