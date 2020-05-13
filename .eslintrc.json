@@ -1,10 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-    "plugin:prettier/recommended",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -14,9 +10,8 @@
   },
   "rules": {
     "import/prefer-default-export": "warn",
-    "jsx-a11y/href-no-hash": [
-      "off"
-    ],
+    "react/prefer-stateless-function": "off",
+    "jsx-a11y/href-no-hash": ["off"],
     "max-len": [
       "warn",
       {
@@ -31,17 +26,9 @@
         "ignoreRegExpLiterals": true
       }
     ],
-    "no-bitwise": [
-      "off"
-    ],
-    "no-plusplus": [
-      "off"
-    ],
-    "no-restricted-globals": [
-      "error",
-      "event",
-      "fdescribe"
-    ],
+    "no-bitwise": ["off"],
+    "no-plusplus": ["off"],
+    "no-restricted-globals": ["error", "event", "fdescribe"],
     "no-underscore-dangle": "warn",
     "prefer-arrow-callback": "error",
     "prefer-destructuring": [
@@ -60,51 +47,28 @@
     "react/forbid-prop-types": [
       "warn",
       {
-        "forbid": [
-          "any",
-          "object"
-        ]
+        "forbid": ["any", "object"]
       }
     ],
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "react/prop-types": [
       "warn",
       {
-        "ignore": [
-          "form",
-          "editedRow",
-          "children",
-          "dispatch"
-        ]
+        "ignore": ["form", "editedRow", "children", "dispatch"]
       }
     ],
     "react/sort-comp": [
       "error",
       {
-        "order": [
-          "static-methods",
-          "lifecycle",
-          "everything-else",
-          "handling",
-          "rendering"
-        ],
+        "order": ["static-methods", "lifecycle", "everything-else", "handling", "rendering"],
         "groups": {
-          "rendering": [
-            "/^render.+$/",
-            "render"
-          ],
-          "handling": [
-            "/^handle.+$/",
-            "/^on.+$/"
-          ]
+          "rendering": ["/^render.+$/", "render"],
+          "handling": ["/^handle.+$/", "/^on.+$/"]
         }
       }
     ]
@@ -115,9 +79,6 @@
     }
   },
   "settings": {
-    "polyfills": [
-      "fetch",
-      "promises"
-    ]
+    "polyfills": ["fetch", "promises"]
   }
 }

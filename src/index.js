@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
+import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import store from './redux/store';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 UIkit.use(Icons);
