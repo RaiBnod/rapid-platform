@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
 import Home from '../components/Home';
+import DynamicPage from '../components/DynamicPage';
 
 function AppRouter() {
   return (
@@ -14,6 +15,9 @@ function AppRouter() {
           <Switch>
             <Route path="/" exact>
               <Home />
+            </Route>
+            <Route path="/:book/:page">
+              <DynamicPage />
             </Route>
           </Switch>
         </div>
