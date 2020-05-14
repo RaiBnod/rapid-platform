@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { FETCH_BOOKS_FAILURE, FETCH_BOOKS_REQUEST, FETCH_BOOKS_SUCCESS } from './bookTypes';
 import { getUrl } from '../../utils';
+import { setLoading } from '../loading/loadingActions';
 
 export const fetchBookRequest = () => {
   return {
@@ -25,13 +26,19 @@ export const fetchBookFailure = (error) => {
 export const fetchBooks = () => {
   return (dispatch) => {
     dispatch(fetchBookRequest());
+    dispatch(setLoading(true));
     axios
       .get(getUrl('/api/books'))
       .then((res) => {
-        dispatch(fetchBookSuccess(res.data));
+        // TODO: remove setTime (delaying just to see effect)
+        setTimeout(() => {
+          dispatch(fetchBookSuccess(res.data));
+          dispatch(setLoading(false));
+        }, 1000);
       })
       .catch((err) => {
         dispatch(fetchBookFailure(err.message));
+        dispatch(setLoading(false));
       });
   };
 };

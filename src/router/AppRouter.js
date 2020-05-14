@@ -4,10 +4,12 @@ import Header from '../components/Header';
 import Nav from '../components/Nav';
 import Home from '../components/Home';
 import DynamicPage from '../components/DynamicPage';
+import Loading from '../components/Loading';
 
 function AppRouter() {
   return (
     <Router>
+      <Loading />
       <Header />
       <div className="body">
         <div className="flex-main">
