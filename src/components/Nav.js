@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchBooks, setActiveNav } from '../redux';
 
 class Nav extends Component {
   componentDidMount() {
-    this.props.fetchBooks();
+    const { fetchBooksDispatch } = this.props;
+    fetchBooksDispatch();
   }
 
   addBook = () => {};
@@ -20,6 +22,7 @@ class Nav extends Component {
             let className = 'uk-parent';
             const isActive = active.book === book.slug;
             if (isActive) className += ' uk-active';
+            const { setActiveNavDispatch } = this.props;
             return (
               <li className={className} key={book.slug}>
                 <Link to={`/${book.slug}/index`}>{book.slug}</Link>
@@ -29,7 +32,7 @@ class Nav extends Component {
                       <li key={page}>
                         <Link
                           to={`/${book.slug}/${page}`}
-                          onClick={() => this.props.setActiveNav({ book: book.slug, page })}
+                          onClick={() => setActiveNavDispatch({ book: book.slug, page })}
                         >
                           {page}
                         </Link>
@@ -72,6 +75,13 @@ class Nav extends Component {
   }
 }
 
+Nav.propTypes = {
+  books: PropTypes.array.isRequired,
+  active: PropTypes.shape({ book: PropTypes.string, page: PropTypes.string }).isRequired,
+  fetchBooksDispatch: PropTypes.func.isRequired,
+  setActiveNavDispatch: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = ({ book, nav }) => {
   return {
     books: book.books,
@@ -81,8 +91,8 @@ const mapStateToProps = ({ book, nav }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchBooks: () => dispatch(fetchBooks()),
-    setActiveNav: (payload) => dispatch(setActiveNav(payload)),
+    fetchBooksDispatch: () => dispatch(fetchBooks()),
+    setActiveNavDispatch: (payload) => dispatch(setActiveNav(payload)),
   };
 };
 

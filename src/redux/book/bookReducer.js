@@ -13,12 +13,14 @@ const bookReducer = (state = initialState, action) => {
       return {
         ...state,
         books: action.payload,
+        error: '',
         loading: false,
       };
     case FETCH_BOOKS_FAILURE:
       return {
         ...state,
-        books: action.payload,
+        books: [],
+        error: action.payload,
         loading: false,
       };
     default:

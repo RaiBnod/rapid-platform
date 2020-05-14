@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FETCH_BOOKS_FAILURE, FETCH_BOOKS_REQUEST, FETCH_BOOKS_SUCCESS } from './bookTypes';
+import { getUrl } from '../../utils';
 
 export const fetchBookRequest = () => {
   return {
@@ -25,7 +26,7 @@ export const fetchBooks = () => {
   return (dispatch) => {
     dispatch(fetchBookRequest());
     axios
-      .get('http://localhost:8080/api/books')
+      .get(getUrl('/api/books'))
       .then((res) => {
         dispatch(fetchBookSuccess(res.data));
       })
