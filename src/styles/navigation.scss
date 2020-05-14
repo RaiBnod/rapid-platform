@@ -3,14 +3,21 @@
 .nav-wrapper {
   min-width: 220px;
   padding: $global-padding $global-padding 0;
-  overflow-y: auto;
   border-right: 1px #e5e5e5 solid;
+  display: flex;
+  flex-direction: column;
+
+  .main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
+  .add-page {
+    margin: 10px 0;
+    height: 40px;
+  }
 
   .navigation {
     color: #767676;
-  }
-
-  .uk-search-default {
-    width: 100%;
   }
 }
