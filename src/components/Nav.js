@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchBooks, setActiveNav } from '../redux';
+import { fetchBooks } from '../redux';
 
 class Nav extends Component {
   componentDidMount() {
@@ -14,7 +14,7 @@ class Nav extends Component {
 
   addPage = () => {};
 
-  renderSideBarNavigation(books, active) {
+  renderSideBarNavigation = (books, active) => {
     return (
       <div className="uk-width-1-2@s uk-width-2-5@m">
         <ul className="uk-nav-default uk-nav-parent-icon" uk-nav="">
@@ -22,7 +22,6 @@ class Nav extends Component {
             let className = 'uk-parent';
             const isActive = active.book === book.slug;
             if (isActive) className += ' uk-active';
-            const { setActiveNavDispatch } = this.props;
             return (
               <li className={className} key={book.slug}>
                 <Link to={`/${book.slug}/index`}>{book.slug}</Link>
@@ -30,12 +29,7 @@ class Nav extends Component {
                   <ul className="uk-nav-sub uk-active">
                     {book.pages.map((page) => (
                       <li key={page}>
-                        <Link
-                          to={`/${book.slug}/${page}`}
-                          onClick={() => setActiveNavDispatch({ book: book.slug, page })}
-                        >
-                          {page}
-                        </Link>
+                        <Link to={`/${book.slug}/${page}`}>{page}</Link>
                       </li>
                     ))}
                   </ul>
@@ -46,7 +40,7 @@ class Nav extends Component {
         </ul>
       </div>
     );
-  }
+  };
 
   render() {
     const { books, active } = this.props;
@@ -79,7 +73,6 @@ Nav.propTypes = {
   books: PropTypes.array.isRequired,
   active: PropTypes.shape({ book: PropTypes.string, page: PropTypes.string }).isRequired,
   fetchBooksDispatch: PropTypes.func.isRequired,
-  setActiveNavDispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ book, nav }) => {
@@ -92,7 +85,6 @@ const mapStateToProps = ({ book, nav }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchBooksDispatch: () => dispatch(fetchBooks()),
-    setActiveNavDispatch: (payload) => dispatch(setActiveNav(payload)),
   };
 };
 

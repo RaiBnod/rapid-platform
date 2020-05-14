@@ -2,6 +2,7 @@ import axios from 'axios';
 import { FETCH_PAGE_FAILURE, FETCH_PAGE_REQUEST, FETCH_PAGE_SUCCESS } from './pageTypes';
 import { getUrl } from '../../utils';
 import { setLoading } from '../loading/loadingActions';
+import { setActiveNav } from '..';
 
 export const fetchPageRequest = () => {
   return {
@@ -34,6 +35,7 @@ export const fetchPage = (book, page) => {
         setTimeout(() => {
           dispatch(fetchPageSuccess(res.data));
           dispatch(setLoading(false));
+          dispatch(setActiveNav({ book, page }));
         }, 1000);
       })
       .catch((err) => {
