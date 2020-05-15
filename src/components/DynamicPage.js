@@ -31,16 +31,24 @@ class DynamicPage extends Component {
 
   render() {
     const { page } = this.props;
+    const { sub_page_data: subPageData = [] } = page;
+
     return (
       <>
         <div className="main">
           <div className="main-body">
-            <h1 id="section2">page1</h1>
+            <h1 id={page.slug}>{page.title}</h1>
             {page.data}
-            <br />
-            <a href="#section2">page1</a>
+            {subPageData.map((sp) => {
+              return (
+                <>
+                  <h2 id={sp.slug}>{sp.title}</h2>
+                  {sp.data}
+                </>
+              );
+            })}
           </div>
-          <DynamicPageNav />
+          <DynamicPageNav page={page} />
         </div>
       </>
     );
@@ -49,7 +57,12 @@ class DynamicPage extends Component {
 
 DynamicPage.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
-  page: PropTypes.shape({ slug: PropTypes.string, data: PropTypes.string }).isRequired,
+  page: PropTypes.shape({
+    slug: PropTypes.string,
+    title: PropTypes.string,
+    data: PropTypes.string,
+    sub_page_data: PropTypes.array,
+  }).isRequired,
   fetchPageDispatch: PropTypes.func.isRequired,
 };
 

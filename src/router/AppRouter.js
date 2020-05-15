@@ -5,6 +5,7 @@ import Nav from '../components/Nav';
 import Home from '../components/Home';
 import DynamicPage from '../components/DynamicPage';
 import Loading from '../components/Loading';
+import NotFound from '../components/NotFound';
 
 function AppRouter() {
   return (
@@ -20,6 +21,9 @@ function AppRouter() {
             </Route>
             <Route path="/:book/:page">
               <DynamicPage />
+            </Route>
+            <Route path="*">
+              <NotFound />
             </Route>
           </Switch>
         </div>
