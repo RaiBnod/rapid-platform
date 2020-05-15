@@ -12,7 +12,7 @@ class DynamicPage extends Component {
 
   shouldComponentUpdate(nextProps) {
     const { location } = this.props;
-    if (nextProps.location !== location) {
+    if (nextProps.location.pathname !== location.pathname) {
       this.callFetchPage(nextProps);
     }
     return true;
@@ -33,8 +33,15 @@ class DynamicPage extends Component {
     const { page } = this.props;
     return (
       <>
-        <div className="main">{page.data}</div>
-        <DynamicPageNav />
+        <div className="main">
+          <div className="main-body">
+            <h1 id="section2">page1</h1>
+            {page.data}
+            <br />
+            <a href="#section2">page1</a>
+          </div>
+          <DynamicPageNav />
+        </div>
       </>
     );
   }
@@ -42,7 +49,7 @@ class DynamicPage extends Component {
 
 DynamicPage.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
-  page: PropTypes.shape({ data: PropTypes.string }).isRequired,
+  page: PropTypes.shape({ slug: PropTypes.string, data: PropTypes.string }).isRequired,
   fetchPageDispatch: PropTypes.func.isRequired,
 };
 

@@ -46,7 +46,7 @@ class Nav extends Component {
     const { books, active } = this.props;
     return (
       <div className="nav-wrapper">
-        <div className="main-content">
+        <div className="nav-wrapper-content">
           {active.book && (
             <div className="navigation">
               {active.book} &gt; {active.page}
