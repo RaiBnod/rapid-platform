@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Aside() {
+function DynamicPageNav() {
   return <div className="aside-wrapper">Right side</div>;
 }
 
-export default Aside;
+export default DynamicPageNav;

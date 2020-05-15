@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Main from './Main';
-import Aside from './Aside';
 import { fetchPage } from '../redux/page/pageActions';
+import DynamicPageNav from './DynamicPageNav';
 
 class DynamicPage extends Component {
   componentDidMount() {
@@ -31,11 +30,11 @@ class DynamicPage extends Component {
   };
 
   render() {
-    const { page, loading } = this.props;
+    const { page } = this.props;
     return (
       <>
-        <Main page={page} loading={loading} />
-        <Aside />
+        <div className="main">{page.data}</div>
+        <DynamicPageNav />
       </>
     );
   }
@@ -43,8 +42,7 @@ class DynamicPage extends Component {
 
 DynamicPage.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
-  page: PropTypes.shape({}).isRequired,
-  loading: PropTypes.bool.isRequired,
+  page: PropTypes.shape({ data: PropTypes.string }).isRequired,
   fetchPageDispatch: PropTypes.func.isRequired,
 };
 
