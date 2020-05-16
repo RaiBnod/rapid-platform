@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -37,14 +37,16 @@ class DynamicPage extends Component {
       <>
         <div className="main">
           <div className="main-body">
-            <h1 id={page.slug}>{page.title}</h1>
+            <h1 key={page.slug} id={page.slug}>
+              {page.title}
+            </h1>
             {page.data}
-            {subPageData.map((sp) => {
+            {subPageData.map(({ slug, title, data }) => {
               return (
-                <>
-                  <h2 id={sp.slug}>{sp.title}</h2>
-                  {sp.data}
-                </>
+                <Fragment key={slug}>
+                  <h2 id={slug}>{title}</h2>
+                  {data}
+                </Fragment>
               );
             })}
           </div>

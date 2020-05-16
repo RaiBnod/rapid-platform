@@ -66,27 +66,19 @@
       overflow-y: scroll;
       overflow-x: hidden;
 
-      &::after {
-        content: '';
-        padding: $global-padding;
+      .title {
+        font-size: 24px;
       }
-
-      h3 {
-        font-size: 20px;
-      }
-
       ul {
-        padding-left: 10px;
-
+        padding-left: 0;
         li {
           display: block;
-
           a {
             line-height: 20px;
             display: block;
             width: 200%;
             height: 200%;
-            padding: 10px;
+            padding: 10px 10px 10px 0;
             text-decoration: none;
           }
         }
@@ -98,6 +90,18 @@
         display: none;
       }
     }
+  }
+}
+
+.dynamic-page-menu-item {
+  .icon {
+    margin: 0 10px 10px 0;
+  }
+
+  cursor: pointer;
+
+  &:hover {
+    color: #e5e5e5;
   }
 }
 

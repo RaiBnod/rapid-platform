@@ -47,11 +47,7 @@ class Nav extends Component {
     return (
       <div className="nav-wrapper">
         <div className="nav-wrapper-content">
-          {active.book && (
-            <div className="navigation">
-              {active.book} &gt; {active.page}
-            </div>
-          )}
+          {active.book && <div className="navigation">{`${active.book} > ${active.page}`}</div>}
           <div className="uk-margin">
             <button className="uk-button uk-button-primary" type="button" onClick={this.addBook}>
               Add Book
