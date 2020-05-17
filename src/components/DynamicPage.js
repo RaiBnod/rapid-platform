@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ReactHtmlParser from 'react-html-parser';
 import { fetchPage } from '../redux/page/pageActions';
 import DynamicPageNav from './DynamicPageNav';
+import DisplayContent from './DisplayContent';
 
 class DynamicPage extends Component {
   componentDidMount() {
@@ -42,7 +42,7 @@ class DynamicPage extends Component {
               {page.title}
             </h1>
             <div className="body-content">
-              {ReactHtmlParser(page.data)}
+              <DisplayContent page={page} />
               {subPageData.map(({ slug, title, data }) => {
                 return (
                   <Fragment key={slug}>
