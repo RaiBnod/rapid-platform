@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import DynamicPageMenuItem from './DynamicPageMenuItem';
+import { deletePage } from '../redux/page/pageActions';
 
 class DynamicPageNav extends Component {
   onEditPage = () => {
@@ -9,7 +11,11 @@ class DynamicPageNav extends Component {
     this.props.onEditPage();
   };
 
-  onDeletePage = () => {};
+  onDeletePage = () => {
+    const { deletePageDispatch, bookId, pageId, history } = this.props;
+    deletePageDispatch(bookId, pageId);
+    history.push('/');
+  };
 
   onCreateSubPage = () => {};
 
@@ -64,6 +70,29 @@ DynamicPageNav.propTypes = {
     sub_page_data: PropTypes.array,
   }).isRequired,
   onEditPage: PropTypes.func.isRequired,
+  deletePageDispatch: PropTypes.func.isRequired,
+  bookId: PropTypes.string.isRequired,
+  pageId: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default withRouter(DynamicPageNav);
+const mapStateToProps = ({
+  nav: {
+    active: { book, page },
+  },
+}) => {
+  return {
+    bookId: book,
+    pageId: page,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deletePageDispatch: (bookId, pageId) => dispatch(deletePage(bookId, pageId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DynamicPageNav));
