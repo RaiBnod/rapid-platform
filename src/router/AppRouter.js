@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
 import Home from '../components/Home';
-import DynamicPage from '../components/DynamicPage';
+import DynamicPage from '../components/body/DynamicPage';
 import Loading from '../components/Loading';
 import NotFound from '../components/NotFound';
 

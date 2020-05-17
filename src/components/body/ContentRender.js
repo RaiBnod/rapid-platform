@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import hljs from 'highlight.js';
+import { Component } from 'react';
 import { Remarkable } from 'remarkable';
 import mermaid from 'mermaid';
+import hljs from 'highlight.js';
 import ReactHtmlParser from 'react-html-parser';
 import PropTypes from 'prop-types';
 
-class DisplayContent extends Component {
+class ContentRender extends Component {
   state = {
     md: null,
   };
 
   componentDidMount() {
+    const { isHtml } = this.props;
     this.setState({
       md: new Remarkable('full', {
-        html: true, // Enable HTML tags in source
+        html: isHtml, // Enable HTML tags in source
         xhtmlOut: false, // Use '/' to close single tags (<br />)
         breaks: false, // Convert '\n' in paragraphs into <br>
         langPrefix: 'language-', // CSS language prefix for fenced blocks
@@ -53,19 +54,30 @@ class DisplayContent extends Component {
     });
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { isHtml } = this.props;
+    if (nextProps.isHtml !== isHtml) {
+      const { md } = this.state;
+      md.set({ html: nextProps.isHtml });
+    }
+    return true;
+  }
+
   render() {
     const { md } = this.state;
-    const {
-      page: { data },
-    } = this.props;
-    return <>{md && ReactHtmlParser(md.render(data))}</>;
+    const { data } = this.props;
+    return md && ReactHtmlParser(md.render(data));
   }
 }
 
-DisplayContent.propTypes = {
-  page: PropTypes.shape({
-    data: PropTypes.string,
-  }).isRequired,
+ContentRender.propTypes = {
+  data: PropTypes.string,
+  isHtml: PropTypes.bool,
 };
 
-export default DisplayContent;
+ContentRender.defaultProps = {
+  data: '',
+  isHtml: false,
+};
+
+export default ContentRender;

@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchPage } from '../redux/page/pageActions';
-import DynamicPageNav from './DynamicPageNav';
-import DisplayContent from './DisplayContent';
+import { fetchPage } from '../../redux/page/pageActions';
+import DynamicPageNav from '../DynamicPageNav';
+import ContentWrapper from './ContentWrapper';
 
 class DynamicPage extends Component {
   componentDidMount() {
@@ -42,12 +42,12 @@ class DynamicPage extends Component {
               {page.title}
             </h1>
             <div className="body-content">
-              <DisplayContent page={page} />
+              <ContentWrapper key={page.slug} page={page} editable />
               {subPageData.map(({ slug, title, data }) => {
                 return (
                   <Fragment key={slug}>
                     <h2 id={slug}>{title}</h2>
-                    <DisplayContent page={{ data }} />
+                    <ContentWrapper page={{ data }} editable={false} />
                   </Fragment>
                 );
               })}
