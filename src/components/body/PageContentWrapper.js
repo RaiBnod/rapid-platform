@@ -7,9 +7,8 @@ class PageContentWrapper extends Component {
   render() {
     const { page, editMode, isHtml, onCancelPage } = this.props;
     const { data } = page;
-
     const renderEditable = <ContentRender data={data} isHtml={isHtml} />;
-    return !editMode ? renderEditable : data && <Editor data={data} onCancel={onCancelPage} />;
+    return !editMode ? renderEditable : data && <Editor page={page} onCancelPage={onCancelPage} />;
   }
 }
 

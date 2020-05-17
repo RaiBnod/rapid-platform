@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { FETCH_PAGE_FAILURE, FETCH_PAGE_REQUEST, FETCH_PAGE_SUCCESS } from './pageTypes';
-import { getUrl } from '../../utils';
+import { getUrl, renameFileName } from '../../utils';
 import { setLoading } from '../loading/loadingActions';
 import { setActiveNav } from '..';
 
@@ -37,6 +37,27 @@ export const fetchPage = (book, page) => {
           dispatch(setLoading(false));
           dispatch(setActiveNav({ book, page }));
         }, 1000);
+      })
+      .catch((err) => {
+        dispatch(fetchPageFailure(err.message));
+        dispatch(setLoading(false));
+      });
+  };
+};
+
+export const editPage = (book, page, title, filename, content, isHtml) => {
+  const data = {
+    title,
+    filename: renameFileName(filename, isHtml),
+    content,
+  };
+  return (dispatch) => {
+    dispatch(setLoading(true));
+    axios
+      .put(getUrl(`/api/book/${book}/page/${page}`), data)
+      .then(() => {
+        dispatch(fetchPage(book, page));
+        return dispatch(setLoading(false));
       })
       .catch((err) => {
         dispatch(fetchPageFailure(err.message));

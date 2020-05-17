@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ContentRender from './ContentRender';
+import { editPage } from '../../redux/page/pageActions';
+import { isHtmlFile } from '../../utils';
 
 class Editor extends Component {
   state = { data: '', mode: 'edit', isHtml: false };
 
   componentDidMount() {
-    const { data } = this.props;
+    const { page } = this.props;
+    const { data, filename } = page;
+    this.setState({ isHtml: isHtmlFile(filename) });
     this.setState({ data });
   }
 
@@ -22,11 +27,18 @@ class Editor extends Component {
     this.setState({ isHtml: e.target.checked });
   };
 
-  onSave = () => {};
+  onSave = () => {
+    const { editPageDispatch } = this.props;
+    const { page, bookId, onCancelPage } = this.props;
+    const { slug: pageId, title, filename } = page;
+    const { data: content, isHtml } = this.state;
+    editPageDispatch(bookId, pageId, title, filename, content, isHtml);
+    onCancelPage();
+  };
 
   onCancel = () => {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.onCancel();
+    const { onCancelPage } = this.props;
+    onCancelPage();
   };
 
   render() {
@@ -47,7 +59,7 @@ class Editor extends Component {
         >
           Preview
         </button>
-        <input type="checkbox" id="type" onChange={this.onTypeToggle} />
+        <input type="checkbox" id="type" checked={isHtml} onChange={this.onTypeToggle} />
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="type">HTML</label>
         {mode === 'edit' ? (
@@ -69,8 +81,32 @@ class Editor extends Component {
 }
 
 Editor.propTypes = {
-  data: PropTypes.string.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  page: PropTypes.shape({
+    data: PropTypes.string,
+    slug: PropTypes.string,
+    title: PropTypes.string,
+    filename: PropTypes.string,
+  }).isRequired,
+  bookId: PropTypes.string.isRequired,
+  onCancelPage: PropTypes.func.isRequired,
+  editPageDispatch: PropTypes.func.isRequired,
 };
 
-export default Editor;
+const mapStateToProps = ({
+  nav: {
+    active: { book },
+  },
+}) => {
+  return {
+    bookId: book,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editPageDispatch: (bookId, pageId, title, filename, content, isHtml) =>
+      dispatch(editPage(bookId, pageId, title, filename, content, isHtml)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);

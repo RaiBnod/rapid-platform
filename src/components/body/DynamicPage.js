@@ -6,6 +6,7 @@ import { fetchPage } from '../../redux/page/pageActions';
 import DynamicPageNav from '../DynamicPageNav';
 import PageContentWrapper from './PageContentWrapper';
 import ContentRender from './ContentRender';
+import { isHtmlFile } from '../../utils';
 
 class DynamicPage extends Component {
   state = {
@@ -47,8 +48,7 @@ class DynamicPage extends Component {
     const { editMode } = this.state;
     const { page } = this.props;
     const { sub_page_data: subPageData = [] } = page;
-    const isHtml = (page && page.filename && page.filename.substr(-3) !== '.md') || false;
-
+    const isHtml = isHtmlFile(page.filename);
     return (
       <>
         <div className="main">
@@ -98,7 +98,6 @@ DynamicPage.propTypes = {
 const mapStateToProps = ({ page }) => {
   return {
     page: page.page,
-    loading: page.loading,
   };
 };
 
