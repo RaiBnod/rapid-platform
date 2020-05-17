@@ -12,3 +12,15 @@ In the project directory, you can run:
 - `npm test`
 - `npm build`
 - `npm eject`
+
+## TODO
+
+- Form validation
+- Error handling
+- UI/UX upgrade
+- Integrate Context API instead passing props down to the child repeatedly
+- Mermaid `CSS` related issue fix etc.
+
+## Prerequisite
+
+- It needs running backend server: https://github.com/RaiBnod/rapid-platform-backend (please follow the README instruction of backend server to run)

@@ -58,15 +58,19 @@ class Nav extends Component {
 }
 
 Nav.propTypes = {
-  books: PropTypes.array.isRequired,
+  books: PropTypes.array,
   active: PropTypes.shape({ book: PropTypes.string, page: PropTypes.string }).isRequired,
   fetchBooksDispatch: PropTypes.func.isRequired,
+};
+
+Nav.defaultProps = {
+  books: [],
 };
 
 const mapStateToProps = ({ book, nav }) => {
   return {
     books: book.books,
-    active: nav.active,
+    active: { ...{ book: '', page: '' }, ...nav.active },
   };
 };
 

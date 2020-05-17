@@ -30,11 +30,15 @@ export const fetchBooks = () => {
     axios
       .get(getUrl('/api/books'))
       .then((res) => {
-        // TODO: remove setTime (delaying just to see effect)
-        setTimeout(() => {
-          dispatch(fetchBookSuccess(res.data));
+        if (res.status === 200) {
+          // TODO: remove setTime (delaying just to see effect)
+          setTimeout(() => {
+            dispatch(fetchBookSuccess(res.data));
+            dispatch(setLoading(false));
+          }, 1000);
+        } else {
           dispatch(setLoading(false));
-        }, 1000);
+        }
       })
       .catch((err) => {
         dispatch(fetchBookFailure(err.message));
