@@ -47,7 +47,7 @@ export const addBook = (title, slug) => {
   return (dispatch) => {
     dispatch(setLoading(true));
     axios
-      .post(getUrl('/api/book'), { title, slug, content: 'Edit the content...' })
+      .post(getUrl('/api/book'), { title, slug, content: 'Edit page content...' })
       .then(() => {
         dispatch(fetchBooks());
         dispatch(setLoading(false));

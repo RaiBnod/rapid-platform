@@ -47,7 +47,7 @@ export const fetchPage = (book, page) => {
 
 export const addPage = (book, title, slug, filename) => {
   return (dispatch) => {
-    const data = { title, slug, filename, content: 'Edit the content...' };
+    const data = { title, slug, filename, content: 'Edit page content...' };
     dispatch(setLoading(true));
     axios
       .post(getUrl(`/api/book/${book}/page`), data)

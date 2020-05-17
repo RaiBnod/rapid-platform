@@ -5,10 +5,10 @@ import { withRouter } from 'react-router-dom';
 import UIkit from 'uikit';
 import DynamicPageMenuItem from './DynamicPageMenuItem';
 import { deletePage } from '../redux/page/pageActions';
+import AddSubPage from './subPage/AddSubPage';
 
 const EDIT_PAGE_ID = 'edit-page-id';
 const DELETE_PAGE_ID = 'delete-page-id';
-const CREATE_SUB_PAGE_PAGE_ID = 'create-sub-page-page-id';
 
 class DynamicPageNav extends Component {
   onEditPage = () => {
@@ -64,13 +64,7 @@ class DynamicPageNav extends Component {
           onClick={this.onDeletePage}
           id={DELETE_PAGE_ID}
         />
-        <DynamicPageMenuItem
-          key="new"
-          icon="plus"
-          text="Create new sub page"
-          onClick={this.onCreateSubPage}
-          id={CREATE_SUB_PAGE_PAGE_ID}
-        />
+        <AddSubPage />
       </div>
     );
   }

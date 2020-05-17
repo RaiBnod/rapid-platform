@@ -48,7 +48,7 @@ class DynamicPage extends Component {
     const { editMode } = this.state;
     const { page } = this.props;
     const { sub_page_data: subPageData = [] } = page;
-    const isHtml = isHtmlFile(page.filename);
+    let isHtml = isHtmlFile(page.filename);
     return (
       <>
         <div className="main">
@@ -66,7 +66,8 @@ class DynamicPage extends Component {
                   onCancelPage={this.onCancelPage}
                 />
               </div>
-              {subPageData.map(({ slug, title, data }) => {
+              {subPageData.map(({ slug, title, data, filename }) => {
+                isHtml = isHtmlFile(filename);
                 return (
                   <Fragment key={slug}>
                     <h2 id={slug}>{title}</h2>
