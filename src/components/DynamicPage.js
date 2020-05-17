@@ -47,7 +47,7 @@ class DynamicPage extends Component {
                 return (
                   <Fragment key={slug}>
                     <h2 id={slug}>{title}</h2>
-                    {data}
+                    <DisplayContent page={{ data }} />
                   </Fragment>
                 );
               })}
