@@ -4,7 +4,10 @@ import { withRouter } from 'react-router-dom';
 import DynamicPageMenuItem from './DynamicPageMenuItem';
 
 class DynamicPageNav extends Component {
-  onEditPage = () => {};
+  onEditPage = () => {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.onEditPage();
+  };
 
   onDeletePage = () => {};
 
@@ -60,6 +63,7 @@ DynamicPageNav.propTypes = {
     data: PropTypes.string,
     sub_page_data: PropTypes.array,
   }).isRequired,
+  onEditPage: PropTypes.func.isRequired,
 };
 
 export default withRouter(DynamicPageNav);

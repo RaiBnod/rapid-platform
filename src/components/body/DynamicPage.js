@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchPage } from '../../redux/page/pageActions';
 import DynamicPageNav from '../DynamicPageNav';
-import ContentWrapper from './ContentWrapper';
+import PageContentWrapper from './PageContentWrapper';
+import ContentRender from './ContentRender';
 
 class DynamicPage extends Component {
+  state = {
+    editMode: false,
+  };
+
   componentDidMount() {
     this.callFetchPage(this.props);
   }
@@ -30,9 +35,19 @@ class DynamicPage extends Component {
     fetchPageDispatch(bookId, pageId);
   };
 
+  onEditPage = () => {
+    this.setState({ editMode: true });
+  };
+
+  onCancelPage = () => {
+    this.setState({ editMode: false });
+  };
+
   render() {
+    const { editMode } = this.state;
     const { page } = this.props;
     const { sub_page_data: subPageData = [] } = page;
+    const isHtml = (page && page.filename && page.filename.substr(-3) !== '.md') || false;
 
     return (
       <>
@@ -42,18 +57,26 @@ class DynamicPage extends Component {
               {page.title}
             </h1>
             <div className="body-content">
-              <ContentWrapper key={page.slug} page={page} editable />
+              <div onDoubleClick={this.onEditPage}>
+                <PageContentWrapper
+                  key={page.slug}
+                  page={page}
+                  editMode={editMode}
+                  isHtml={isHtml}
+                  onCancelPage={this.onCancelPage}
+                />
+              </div>
               {subPageData.map(({ slug, title, data }) => {
                 return (
                   <Fragment key={slug}>
                     <h2 id={slug}>{title}</h2>
-                    <ContentWrapper page={{ data }} editable={false} />
+                    <ContentRender data={data} isHtml={isHtml} />
                   </Fragment>
                 );
               })}
             </div>
           </div>
-          <DynamicPageNav page={page} />
+          <DynamicPageNav onEditPage={this.onEditPage} page={page} />
         </div>
       </>
     );
@@ -65,6 +88,7 @@ DynamicPage.propTypes = {
   page: PropTypes.shape({
     slug: PropTypes.string,
     title: PropTypes.string,
+    filename: PropTypes.string,
     data: PropTypes.string,
     sub_page_data: PropTypes.array,
   }).isRequired,
