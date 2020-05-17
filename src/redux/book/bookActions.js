@@ -42,3 +42,19 @@ export const fetchBooks = () => {
       });
   };
 };
+
+export const addBook = (title, slug) => {
+  return (dispatch) => {
+    dispatch(setLoading(true));
+    axios
+      .post(getUrl('/api/book'), { title, slug, content: 'Edit the content...' })
+      .then(() => {
+        dispatch(fetchBooks());
+        dispatch(setLoading(false));
+      })
+      .catch((err) => {
+        dispatch(fetchBookFailure(err.message));
+        dispatch(setLoading(false));
+      });
+  };
+};

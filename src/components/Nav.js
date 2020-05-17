@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchBooks } from '../redux';
+import AddBook from './book/AddBook';
 
 class Nav extends Component {
   componentDidMount() {
@@ -45,22 +46,20 @@ class Nav extends Component {
   render() {
     const { books, active } = this.props;
     return (
-      <div className="nav-wrapper">
-        <div className="nav-wrapper-content">
-          {active.book && <div className="navigation">{`${active.book} > ${active.page}`}</div>}
-          <div className="uk-margin">
-            <button className="uk-button uk-button-primary" type="button" onClick={this.addBook}>
-              Add Book
+      <>
+        <div className="nav-wrapper">
+          <div className="nav-wrapper-content">
+            {active.book && <div className="navigation">{`${active.book} > ${active.page}`}</div>}
+            <AddBook />
+            {this.renderSideBarNavigation(books, active)}
+          </div>
+          <div className="add-page">
+            <button className="uk-button uk-button-primary" type="button" onClick={this.addPage}>
+              Add Page
             </button>
           </div>
-          {this.renderSideBarNavigation(books, active)}
         </div>
-        <div className="add-page">
-          <button className="uk-button uk-button-primary" type="button" onClick={this.addPage}>
-            Add Page
-          </button>
-        </div>
-      </div>
+      </>
     );
   }
 }

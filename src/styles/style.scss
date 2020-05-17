@@ -112,14 +112,26 @@
     padding: 15px 15px 30px;
     border-radius: 3px;
     border: 1px solid #b0dbee;
-    font: 18px default, cursive;
+    font-size: 14px;
     transition: box-shadow 0.5s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .preview {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    max-width: 100%;
+    line-height: 1.4;
     height: 460px;
-    overflow: scroll;
+    resize: none;
+    padding: 15px 15px 30px;
+    border-radius: 3px;
+    border: 1px solid #b0dbee;
+    font-size: 14px;
+    transition: box-shadow 0.5s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: auto;
   }
 }
 
