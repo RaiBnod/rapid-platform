@@ -45,6 +45,23 @@ export const fetchPage = (book, page) => {
   };
 };
 
+export const addPage = (book, title, slug, filename) => {
+  return (dispatch) => {
+    const data = { title, slug, filename, content: 'Edit the content...' };
+    dispatch(setLoading(true));
+    axios
+      .post(getUrl(`/api/book/${book}/page`), data)
+      .then(() => {
+        dispatch(fetchBooks());
+        return dispatch(setLoading(false));
+      })
+      .catch((err) => {
+        dispatch(fetchPageFailure(err.message));
+        dispatch(setLoading(false));
+      });
+  };
+};
+
 export const editPage = (book, page, title, filename, content, isHtml) => {
   const data = {
     title,

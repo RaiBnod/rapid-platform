@@ -32,16 +32,17 @@ class AddBook extends Component {
   render() {
     const { title, slug } = this.state;
     return (
-      <div className="uk-margin">
-        <button
-          className="uk-button uk-button-primary"
-          type="button"
-          onClick={this.addBook}
-          href="#add-book"
-          uk-toggle=""
-        >
-          Add Book
-        </button>
+      <>
+        <div className="uk-margin">
+          <button
+            className="uk-button uk-button-primary"
+            type="button"
+            href="#add-book"
+            uk-toggle=""
+          >
+            Add Book
+          </button>
+        </div>
         <div id="add-book" uk-modal="">
           <div className="uk-modal-dialog">
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
@@ -83,7 +84,7 @@ class AddBook extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

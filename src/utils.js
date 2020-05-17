@@ -23,3 +23,8 @@ export function renameFileName(filename, isHtml) {
   separatedNames.push(extension);
   return separatedNames.join('.');
 }
+
+export function createFileName(filename, isHtml) {
+  const extension = getFileExtension(isHtml);
+  return filename + extension;
+}

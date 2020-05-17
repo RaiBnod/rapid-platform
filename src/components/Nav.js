@@ -4,16 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchBooks } from '../redux';
 import AddBook from './book/AddBook';
+import AddPage from './page/AddPage';
 
 class Nav extends Component {
   componentDidMount() {
     const { fetchBooksDispatch } = this.props;
     fetchBooksDispatch();
   }
-
-  addBook = () => {};
-
-  addPage = () => {};
 
   renderSideBarNavigation = (books, active) => {
     return (
@@ -53,11 +50,7 @@ class Nav extends Component {
             <AddBook />
             {this.renderSideBarNavigation(books, active)}
           </div>
-          <div className="add-page">
-            <button className="uk-button uk-button-primary" type="button" onClick={this.addPage}>
-              Add Page
-            </button>
-          </div>
+          <AddPage />
         </div>
       </>
     );
