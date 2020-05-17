@@ -48,10 +48,10 @@
     display: flex;
     .main-body {
       padding: $global-padding 80px 0;
-      flex: 1;
+      width: calc(100vw - 760px);
       &::after {
         content: '';
-        padding: $global-padding;
+        padding-bottom: $global-padding;
       }
     }
 
@@ -88,6 +88,10 @@
     @media screen and (max-width: 1200px) {
       .dynamic-page-nav {
         display: none;
+      }
+      .main-body {
+        padding: $global-padding 80px 0;
+        width: calc(100vw - 380px);
       }
     }
   }

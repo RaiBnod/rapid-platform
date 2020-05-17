@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
 import { fetchPage } from '../redux/page/pageActions';
 import DynamicPageNav from './DynamicPageNav';
 
@@ -40,15 +41,17 @@ class DynamicPage extends Component {
             <h1 key={page.slug} id={page.slug}>
               {page.title}
             </h1>
-            {page.data}
-            {subPageData.map(({ slug, title, data }) => {
-              return (
-                <Fragment key={slug}>
-                  <h2 id={slug}>{title}</h2>
-                  {data}
-                </Fragment>
-              );
-            })}
+            <div className="body-content">
+              {ReactHtmlParser(page.data)}
+              {subPageData.map(({ slug, title, data }) => {
+                return (
+                  <Fragment key={slug}>
+                    <h2 id={slug}>{title}</h2>
+                    {data}
+                  </Fragment>
+                );
+              })}
+            </div>
           </div>
           <DynamicPageNav page={page} />
         </div>
