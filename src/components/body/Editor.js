@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import MonacoEditor from 'react-monaco-editor';
 import ContentRender from './ContentRender';
 import { editPage } from '../../redux/page/pageActions';
 import { isHtmlFile } from '../../utils';
@@ -15,12 +16,16 @@ class Editor extends Component {
     this.setState({ data });
   }
 
-  textChange = (e) => {
-    this.setState({ data: e.target.value });
+  editorDidMount = (editor) => {
+    editor.focus();
   };
 
   changeMode = (mode) => {
     this.setState({ mode });
+  };
+
+  onChange = (newValue) => {
+    this.setState({ data: newValue });
   };
 
   onTypeToggle = (e) => {
@@ -63,7 +68,14 @@ class Editor extends Component {
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="type">HTML</label>
         {mode === 'edit' ? (
-          <textarea onChange={this.textChange} value={data} />
+          <MonacoEditor
+            height="460"
+            language="javascript"
+            theme="vs-dark"
+            value={data}
+            onChange={this.onChange}
+            editorDidMount={this.editorDidMount}
+          />
         ) : (
           <div className="preview">
             <ContentRender data={data} isHtml={isHtml} />

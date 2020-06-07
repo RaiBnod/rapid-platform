@@ -9,10 +9,12 @@
     "axios": "^0.19.2",
     "highlight.js": "^10.0.3",
     "mermaid": "^8.5.0",
+    "monaco-editor-webpack-plugin": "^1.9.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-html-parser": "^2.0.2",
+    "react-monaco-editor": "^0.36.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -33,13 +35,14 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
     "node-sass": "^4.14.1",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "react-app-rewired": "^2.1.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "lint:staged": "lint-staged"
   },
   "eslintConfig": {
